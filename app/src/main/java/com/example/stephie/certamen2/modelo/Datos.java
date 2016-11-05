@@ -1,4 +1,4 @@
-package com.example.stephie.certamen2;
+package com.example.stephie.certamen2.modelo;
 
 /**
  * Created by Stephie on 30-09-2016.
