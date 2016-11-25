@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.stephie.certamen2.R;
 import com.example.stephie.certamen2.modelo.Datos;
 
 import java.util.List;
@@ -28,9 +29,9 @@ public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.
 
         public RepositorioViewHolder(View v) {
             super(v);
-            nombre = (TextView) v.findViewById(R.id.historialnivel);
-            fecha = (TextView) v.findViewById(R.id.historialfecha);
-            descripcion = (TextView) v.findViewById(R.id.historiallogrado);
+            nombre = (TextView) v.findViewById(R.id.nombre_repo);
+            fecha = (TextView) v.findViewById(R.id.ultima_actualizacion);
+            descripcion = (TextView) v.findViewById(R.id.descripcion_repo);
         }
     }
 
@@ -44,7 +45,7 @@ public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.
     @Override
     public RepositorioViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.historial, viewGroup, false);
+                .inflate(R.layout.repositorio, viewGroup, false);
         return new RepositorioViewHolder(v);
     }
 

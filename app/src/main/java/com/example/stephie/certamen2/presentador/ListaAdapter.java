@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Stephie on 04-11-2016.
  */
 
-public abstract class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder>{
+public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder>{
 
         private List<Datos> mDataset;
 
@@ -56,5 +56,4 @@ public abstract class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.Vie
         public int getItemCount() {
             return mDataset.size();
         }
-    }
 }

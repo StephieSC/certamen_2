@@ -1,6 +1,7 @@
 package com.example.stephie.certamen2.presentador;
 
 
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,36 +35,42 @@ public class DatosAdapterImpl implements DatosAdapter{
     private static final String URL_BASE = " https://api.github.com/users/";
     private static final String URL_USUARIO = MainPresentadorImpl.getUSR();
     //COMENTADO PORQUE SE CAMBIO LA URL
-    private static final String URL_FINAL = URL_BASE + URL_USUARIO +"/repos";
-    //private static final String URL_FINAL = "http://www.mocky.io/v2/57eee3822600009324111202";
+    //private static final String URL_FINAL = URL_BASE + URL_USUARIO +"/repos";
+    private static final String URL_FINAL = "http://www.mocky.io/v2/57eee3822600009324111202";
     private static final String TAG = "DatosAdapterImpl";
     private List<Datos> items;
 
     public DatosAdapterImpl() {
         super();
-        HttpClient httpClient = new DefaultHttpClient();
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                HttpClient httpClient = new DefaultHttpClient();
 
-        HttpGet del =
-                new HttpGet(URL_FINAL);
+                HttpGet del =
+                        new HttpGet(URL_FINAL);
 
-        del.setHeader("content-type", "application/json");
+                del.setHeader("content-type", "application/json");
 
-        try
-        {
-            HttpResponse resp = httpClient.execute(del);
-            String respStr = EntityUtils.toString(resp.getEntity());
-
-
-            JSONArray respJSON = new JSONArray(respStr);
-
-            items= parseJson(respJSON);
-        }
-        catch(Exception ex)
-        {
-            Log.e("ServicioRest","Error!", ex);
-        }
+                try
+                {
+                    HttpResponse resp = httpClient.execute(del);
+                    String respStr = EntityUtils.toString(resp.getEntity());
 
 
+                    JSONArray respJSON = new JSONArray(respStr);
+
+                    items= parseJson(respJSON);
+                }
+                catch(Exception ex)
+                {
+                    Log.e("ServicioRest","Error!", ex);
+                }
+                return null;
+            }
+        };
+
+        asyncTask.execute();
 
     }
 
@@ -119,7 +126,7 @@ public class DatosAdapterImpl implements DatosAdapter{
                     Datos dato = new Datos(
                             objeto.getString("name"),
                             objeto.getString("description"),
-                            "ultima actualizacion: "+ objeto.getString("actualizacion"),
+                            "ultima actualizacion: "+ objeto.getString("updated_at"),
                             objeto.getString("html_url"));
 
 

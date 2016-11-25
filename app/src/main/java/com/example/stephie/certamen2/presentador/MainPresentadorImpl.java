@@ -22,7 +22,7 @@ public class MainPresentadorImpl extends AppCompatActivity {
 
     // Atributos
     RecyclerView recyclerView;
-    ArrayAdapter adapter;
+    ListaAdapter adapter;
     List<Datos> datos;
     static String usr;
 
